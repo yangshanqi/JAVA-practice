@@ -11,8 +11,8 @@ import java.util.List;
 
 public class TankClient extends Frame{
 	
-	public static final int GAME_HEIGHT = 800;
-	public static final int GAME_WIDTH = 600;
+	public static final int GAME_HEIGHT = 600;
+	public static final int GAME_WIDTH = 800;
 	
 	List<Missile> missiles = new ArrayList<Missile> ();
 	Tank myTank = new Tank (30,40,this);
@@ -33,14 +33,14 @@ public class TankClient extends Frame{
 	@Override
 	public void update(Graphics g) {
 		if (offScreenImage == null) {
-			offScreenImage = this.createImage(GAME_HEIGHT, GAME_WIDTH);
+			offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
 		}
 		
 		Graphics gOffScr = offScreenImage.getGraphics();		
 		//reset the background color
 		Color c = gOffScr.getColor();
 		gOffScr.setColor(Color.GREEN);
-		gOffScr.fillRect(0, 0, GAME_HEIGHT, GAME_WIDTH);
+		gOffScr.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		gOffScr.setColor(c);
 		//draw everything on the off-line image first
 		paint(gOffScr);
@@ -54,7 +54,7 @@ public class TankClient extends Frame{
 
 	public void launchFrame () {
 		this.setLocation(400, 300);
-		this.setSize(GAME_HEIGHT, GAME_WIDTH);		
+		this.setSize(GAME_WIDTH, GAME_HEIGHT);		
 		this.addWindowListener(new WindowAdapter() {			
 			@Override //匿名内部类
 			public void windowClosing(WindowEvent e) {
