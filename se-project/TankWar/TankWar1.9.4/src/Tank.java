@@ -174,6 +174,8 @@ public class Tank {
 	}
 	
 	void locateDirection () {
+		Direction oldDir = dir;
+		
 		if (bL & !bU & !bR & !bD) dir = Direction.L;
 		else if (bL & bU & !bR & !bD) dir = Direction.LU;
 		else if (!bL & bU & !bR & !bD) dir = Direction.U;
@@ -183,6 +185,10 @@ public class Tank {
 		else if (!bL & !bU & !bR & bD) dir = Direction.D;
 		else if (bL & !bU & !bR & bD) dir = Direction.LD;
 		else if (!bL & !bU & !bR & !bD) dir = Direction.STOP;
+	
+		if (dir != oldDir) {
+			this.tankClient.nc.send(new TankMoveMsg(id,dir));
+		}
 	}
 
 	public void keyReleased(KeyEvent e) {
